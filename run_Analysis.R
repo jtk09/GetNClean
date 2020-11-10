@@ -24,7 +24,7 @@ dataset=data.frame(Xy_all)
 colnames(dataset)=c("id",allfeatures[,2],"activity")
 # select tri-axial accelerometer (body and gravity) and gyroscope (body only) "mean" and "std" variables only
 dataset=dataset[,c(1,grep("^tBodyAcc-mean|^tGravityAcc-mean|^tBodyAcc-std|^tGravityAcc-std|^tBodyGyro-mean|^tBodyGyro-std",colnames(dataset)),length(dataset[1,]))]
-dataset[,length(dataset)]=factor(dataset[,length(dataset)],labels=actCorr[,2])
+dataset$activity=factor(dataset$activity,labels=actCorr[,2])
 library(reshape)
 mdataset <- melt(dataset, id=c("id","activity"))
 tidyset <- cast(mdataset, variable~activity~id, mean)
